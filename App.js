@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React, { useContext } from "react";
+import { StatusBar, StyleSheet, View } from "react-native";
+import Context, { NewsContext } from "./API/Context";
+import Navigation from "./Components/Navigation";
 
-export default function App() {
+function App() {
+  const { darkTheme } = useContext(NewsContext);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, backgroundColor: darkTheme ? "black" : "white" }}>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.container}>
+        <Navigation />
+      </View>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
+
+export default () => {
+  return (
+    <Context>
+      <App />
+    </Context>
+  );
+};
